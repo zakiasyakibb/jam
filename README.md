@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="id" class="dark">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jam Presisi Atom - Akurasi Dunia Nyata</title>
+    <title>SyrvenSync - Jam Presisi Server NTP</title>
+</head>
+<body>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -45,7 +47,6 @@
     </style>
 </head>
 <body class="bg-[#0b0f17] text-gray-100 min-h-screen flex flex-col justify-between overflow-x-hidden">
-
     <!-- Header / Navbar -->
     <header class="w-full max-w-5xl mx-auto px-4 py-5 flex justify-between items-center z-10">
         <div class="flex items-center gap-3">
@@ -60,7 +61,6 @@
                 <p class="text-xs text-gray-400">Jam Presisi Server NTP & Asisten AI</p>
             </div>
         </div>
-        
         <!-- Status Sinkronisasi -->
         <div id="sync-status-badge" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-medium cursor-pointer transition-all duration-300 hover:bg-amber-500/20" onclick="sinkronisasiWaktu()">
             <span class="relative flex h-2 w-2">
@@ -70,10 +70,8 @@
             <span id="sync-status-text">Mengkalibrasi...</span>
         </div>
     </header>
-
     <!-- Main Content Area -->
     <main class="flex-1 w-full max-w-5xl mx-auto px-4 flex flex-col justify-center py-6">
-        
         <!-- Tab Navigation -->
         <div class="flex justify-center mb-8 overflow-x-auto pb-2">
             <div class="bg-gray-900/80 p-1 rounded-2xl border border-gray-800 flex gap-1 shrink-0">
@@ -94,17 +92,14 @@
                 </button>
             </div>
         </div>
-
         <!-- TAB 1: JAM UTAMA -->
         <div id="content-jam" class="tab-content space-y-8">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                
                 <!-- Analog Clock (Left/Top) -->
                 <div class="md:col-span-5 flex justify-center">
                     <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full glass flex items-center justify-center p-4 border border-gray-800 shadow-2xl">
                         <!-- Clock Face Grid/Ticks -->
-                        <div class="absolute inset-0 rounded-full opacity-35" id="clock-ticks"></div>
-                        
+                        <div class="absolute inset-0 rounded-full opacity-35" id="clock-ticks"></div>                    
                         <!-- Numbers -->
                         <div class="absolute inset-4 text-xs font-semibold text-gray-500">
                             <span class="absolute top-1 left-1/2 -translate-x-1/2">12</span>
@@ -112,17 +107,14 @@
                             <span class="absolute bottom-1 left-1/2 -translate-x-1/2">6</span>
                             <span class="absolute left-1 top-1/2 -translate-y-1/2">9</span>
                         </div>
-
                         <!-- Hands -->
                         <div id="hour-hand" class="absolute w-1.5 h-20 md:h-24 bg-white rounded-full origin-bottom bottom-1/2 transition-transform duration-75" style="transform: rotate(0deg)"></div>
                         <div id="minute-hand" class="absolute w-1 h-28 md:h-32 bg-gray-300 rounded-full origin-bottom bottom-1/2 transition-transform duration-75" style="transform: rotate(0deg)"></div>
-                        <div id="second-hand" class="absolute w-0.5 h-32 md:h-36 bg-brand-500 rounded-full origin-bottom bottom-1/2 transition-transform duration-[40ms]" style="transform: rotate(0deg)"></div>
-                        
+                        <div id="second-hand" class="absolute w-0.5 h-32 md:h-36 bg-brand-500 rounded-full origin-bottom bottom-1/2 transition-transform duration-[40ms]" style="transform: rotate(0deg)"></div>                   
                         <!-- Center Pin -->
                         <div class="absolute w-3.5 h-3.5 bg-brand-500 rounded-full border-2 border-white z-10"></div>
                     </div>
                 </div>
-
                 <!-- Digital Clock & Info (Right/Bottom) -->
                 <div class="md:col-span-7 space-y-6 text-center md:text-left">
                     <div class="space-y-2">
@@ -139,7 +131,6 @@
                             Memuat tanggal...
                         </div>
                     </div>
-
                     <!-- Statistik Akurasi Mini -->
                     <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-md mx-auto md:mx-0">
                         <div class="glass p-3 rounded-xl border border-gray-800 text-left">
@@ -155,7 +146,6 @@
                             <p id="stat-source" class="text-sm font-semibold text-brand-500">Menghubungkan...</p>
                         </div>
                     </div>
-
                     <div class="flex flex-wrap justify-center md:justify-start gap-3">
                         <button onclick="sinkronisasiWaktu()" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 active:scale-95 text-white font-medium rounded-xl text-sm transition-all duration-150 flex items-center gap-2 shadow-lg shadow-brand-500/20">
                             <!-- Sync SVG icon -->
@@ -171,32 +161,27 @@
                 </div>
             </div>
         </div>
-
         <!-- TAB 2: JAM DUNIA -->
         <div id="content-dunia" class="tab-content hidden space-y-6">
             <div class="text-center md:text-left space-y-2 max-w-xl">
                 <h2 class="text-2xl font-bold">Jam Dunia Nyata</h2>
                 <p class="text-sm text-gray-400">Waktu akurat di berbagai kota besar dunia yang disinkronkan secara langsung menggunakan offset atom.</p>
             </div>
-
             <!-- Grid Daftar Kota -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="world-clock-grid">
                 <!-- Diisi otomatis melalui JS -->
             </div>
         </div>
-
         <!-- TAB 3: STOPWATCH -->
         <div id="content-stopwatch" class="tab-content hidden space-y-6 max-w-xl mx-auto">
             <div class="text-center space-y-4">
-                <h2 class="text-2xl font-bold">Stopwatch Presisi Tinggi</h2>
-                
+                <h2 class="text-2xl font-bold">Stopwatch Presisi Tinggi</h2>       
                 <!-- Display Waktu Stopwatch -->
                 <div class="glass py-8 px-6 rounded-3xl border border-gray-800 shadow-inner">
                     <div class="text-5xl sm:text-6xl font-bold font-mono-custom tracking-tight text-white" id="stopwatch-display">
                         00:00:00<span class="text-2xl sm:text-3xl text-brand-500">.00</span>
                     </div>
                 </div>
-
                 <!-- Kontrol Stopwatch -->
                 <div class="flex justify-center gap-4">
                     <button onclick="lapStopwatch()" id="btn-stopwatch-lap" disabled class="px-6 py-3 bg-gray-800 hover:bg-gray-700 disabled:opacity-40 disabled:hover:bg-gray-800 text-gray-300 font-medium rounded-2xl text-sm transition-all duration-150 flex items-center gap-2">
@@ -209,7 +194,6 @@
                         Reset
                     </button>
                 </div>
-
                 <!-- Riwayat Putaran / Lap List -->
                 <div class="mt-6 text-left">
                     <h3 class="text-xs font-semibold uppercase text-gray-400 mb-2">Riwayat Putaran</h3>
@@ -219,12 +203,10 @@
                 </div>
             </div>
         </div>
-
         <!-- TAB 4: TIMER -->
         <div id="content-timer" class="tab-content hidden space-y-6 max-w-xl mx-auto">
             <div class="text-center space-y-6">
                 <h2 class="text-2xl font-bold">Timer Hitung Mundur</h2>
-
                 <!-- Input Setelan Timer (Jika belum berjalan) -->
                 <div id="timer-inputs" class="glass p-6 rounded-3xl border border-gray-800 space-y-4">
                     <p class="text-xs font-semibold uppercase text-gray-400">Atur Durasi</p>
@@ -245,7 +227,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Display Timer (Saat berjalan) -->
                 <div id="timer-display-container" class="glass py-8 px-6 rounded-3xl border border-gray-800 shadow-inner hidden">
                     <div class="text-5xl sm:text-6xl font-bold font-mono-custom tracking-tight text-white" id="timer-display">
@@ -255,7 +236,6 @@
                         <div id="timer-progress" class="bg-brand-500 h-full w-full transition-all duration-300"></div>
                     </div>
                 </div>
-
                 <!-- Kontrol Timer -->
                 <div class="flex justify-center gap-4">
                     <button onclick="startTimer()" id="btn-timer-start" class="px-8 py-3 bg-brand-500 hover:bg-brand-600 text-white font-medium rounded-2xl text-sm transition-all duration-150 flex items-center gap-2 shadow-lg shadow-brand-500/20">
@@ -267,7 +247,6 @@
                 </div>
             </div>
         </div>
-
         <!-- TAB 5: ASISTEN AI -->
         <div id="content-ai" class="tab-content hidden space-y-8">
             <div class="text-center md:text-left space-y-2 max-w-xl">
@@ -276,7 +255,6 @@
                 </h2>
                 <p class="text-sm text-gray-400">Optimalkan manajemen harian Anda atau jelajahi silsilah kebudayaan waktu di berbagai belahan dunia menggunakan Gemini AI.</p>
             </div>
-
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Fitur 1: Planner Harian -->
                 <div class="glass p-6 rounded-3xl border border-gray-800 flex flex-col justify-between space-y-4">
@@ -284,8 +262,7 @@
                         <h3 class="text-lg font-bold text-white flex items-center gap-2">
                             <span>📅</span> Perencana Jadwal Harian
                         </h3>
-                        <p class="text-xs text-gray-400 mt-1">Sederhanakan daftar tugas Anda menjadi jadwal berurutan berfokus tinggi.</p>
-                        
+                        <p class="text-xs text-gray-400 mt-1">Sederhanakan daftar tugas Anda menjadi jadwal berurutan berfokus tinggi.</p>                      
                         <div class="mt-4 space-y-3">
                             <div>
                                 <label class="text-xs text-gray-400 block mb-1 font-medium">Jam Mulai:</label>
@@ -297,20 +274,17 @@
                             </div>
                         </div>
                     </div>
-
                     <button onclick="generateSchedule()" id="btn-ai-schedule" class="w-full py-3 bg-brand-500 hover:bg-brand-600 active:scale-95 text-white font-medium rounded-xl text-sm transition-all duration-150 flex items-center justify-center gap-2 shadow-lg shadow-brand-500/20">
                         ✨ Rancang Jadwal Presisi AI
                     </button>
                 </div>
-
                 <!-- Fitur 2: Eksplorasi Waktu -->
                 <div class="glass p-6 rounded-3xl border border-gray-800 flex flex-col justify-between space-y-4">
                     <div>
                         <h3 class="text-lg font-bold text-white flex items-center gap-2">
                             <span>🌏</span> Wawasan Waktu & Budaya
                         </h3>
-                        <p class="text-xs text-gray-400 mt-1">Pelajari sosiologi waktu, sejarah zona waktu, atau cara pandang budaya tertentu terhadap waktu.</p>
-                        
+                        <p class="text-xs text-gray-400 mt-1">Pelajari sosiologi waktu, sejarah zona waktu, atau cara pandang budaya tertentu terhadap waktu.</p>                        
                         <div class="mt-4 space-y-3">
                             <div>
                                 <label class="text-xs text-gray-400 block mb-1 font-medium">Nama Kota atau Negara:</label>
@@ -323,13 +297,11 @@
                             </div>
                         </div>
                     </div>
-
                     <button onclick="exploreCulturalTime()" id="btn-ai-timezone" class="w-full py-3 bg-gray-800 hover:bg-gray-700 active:scale-95 text-brand-400 border border-brand-500/20 font-medium rounded-xl text-sm transition-all duration-150 flex items-center justify-center gap-2">
                         ✨ Jelajahi Waktu & Budaya
                     </button>
                 </div>
             </div>
-
             <!-- Output Panel AI -->
             <div id="ai-output-panel" class="glass p-6 rounded-3xl border border-gray-800 space-y-4 hidden transition-all duration-300">
                 <div class="flex justify-between items-center border-b border-gray-800 pb-3">
@@ -339,23 +311,19 @@
                     <button onclick="copyAIResult()" class="text-xs text-brand-500 hover:text-brand-400 flex items-center gap-1 bg-brand-500/10 px-2.5 py-1.5 rounded-lg border border-brand-500/20">
                         Salin Hasil
                     </button>
-                </div>
-                
+                </div>               
                 <!-- Loading State inside panel -->
                 <div id="ai-loader" class="hidden py-10 flex flex-col items-center justify-center space-y-3">
                     <div class="w-10 h-10 border-4 border-brand-500/30 border-t-brand-500 rounded-full animate-spin"></div>
                     <p class="text-xs text-gray-400 animate-pulse">Menghubungkan ke Gemini API...</p>
                 </div>
-
                 <!-- Text Result -->
                 <div id="ai-result" class="text-sm text-gray-300 leading-relaxed space-y-3 whitespace-pre-line max-h-96 overflow-y-auto pr-2">
                     <!-- Dinamis diisi AI -->
                 </div>
             </div>
         </div>
-
     </main>
-
     <!-- Footer -->
     <footer class="w-full max-w-5xl mx-auto px-4 py-6 border-t border-gray-900/50 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-gray-500">
         <p>© 2026 SyrvenSync. Waktu yang disinkronkan secara global.</p>
@@ -367,7 +335,6 @@
             <span>v2.6-AI-Live</span>
         </div>
     </footer>
-
     <!-- Notifikasi Custom (Pengganti Alert) -->
     <div id="custom-toast" class="fixed bottom-6 right-6 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 z-50">
         <div class="glass px-5 py-3.5 rounded-2xl border border-brand-500/30 flex items-center gap-3 shadow-xl">
@@ -383,21 +350,18 @@
             </div>
         </div>
     </div>
-
     <!-- Script Utama -->
     <script>
         // --- DATA STATE SINKRONISASI ---
         let timeOffset = 0; // Selisih waktu perangkat lokal dengan server dalam Milidetik (Server - Lokal)
         let isSynced = false;
         let showMs = true;
-
         // --- SISTEM ATOMIC CLOCK SYNC (MENGGUNAKAN SERVER TIME) ---
         async function sinkronisasiWaktu() {
             updateSyncUI('sinkronisasi');
             const statSource = document.getElementById('stat-source');
             const statLatency = document.getElementById('stat-latency');
-            const statOffset = document.getElementById('stat-offset');
-            
+            const statOffset = document.getElementById('stat-offset');        
             // Menggunakan penyedia API waktu berkecepatan tinggi & kompatibel CORS dengan AbortController timeout
             const providers = [
                 {
@@ -426,40 +390,31 @@
                     }
                 }
             ];
-
             let success = false;
-
             for (const provider of providers) {
                 try {
                     const controller = new AbortController();
                     const timeoutId = setTimeout(() => controller.abort(), 3500); // Timeout 3.5 detik per provider
-
                     const t0 = Date.now();
                     statSource.innerText = "Menghubungkan...";
-
                     const response = await fetch(provider.url, { 
                         cache: 'no-store',
                         signal: controller.signal 
                     });
                     clearTimeout(timeoutId);
-
                     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
                     const serverTimeMs = await provider.parser(response);
                     const t1 = Date.now();
                     const latency = t1 - t0;
-
                     if (serverTimeMs) {
                         // Hitung perkiraan waktu sebenarnya dengan kompensasi latensi (RTT / 2)
                         const estimatedServerTime = serverTimeMs + (latency / 2);
                         timeOffset = estimatedServerTime - t1;
                         isSynced = true;
-
                         // Perbarui UI
                         statLatency.innerText = `${Math.round(latency)} ms`;
                         statOffset.innerText = `${timeOffset >= 0 ? '+' : ''}${Math.round(timeOffset)} ms`;
                         statSource.innerText = provider.name;
-
                         updateSyncUI('berhasil');
                         showToast("Kalibrasi Berhasil", `Jam disinkronkan via ${provider.name} (Offset: ${Math.round(timeOffset)}ms)`);
                         success = true;
@@ -469,7 +424,6 @@
                     console.warn(`Sinkronisasi via ${provider.name} dilewati:`, err.message || err);
                 }
             }
-
             if (!success) {
                 // Gunakan waktu lokal sistem jika semua API gagal (dengan kompensasi)
                 isSynced = false;
@@ -481,14 +435,12 @@
                 showToast("Sinkronisasi Gagal", "Menggunakan jam internal perangkat Anda.", "gagal");
             }
         }
-
         // --- MANAGE UI SINKRONISASI ---
         function updateSyncUI(state) {
             const badge = document.getElementById('sync-status-badge');
             const dot = document.getElementById('sync-dot');
             const dotPing = document.getElementById('sync-dot-ping');
             const text = document.getElementById('sync-status-text');
-
             if (state === 'sinkronisasi') {
                 badge.className = "flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-medium cursor-pointer animate-pulse";
                 dot.className = "relative inline-flex rounded-full h-2 w-2 bg-amber-500";
@@ -506,51 +458,41 @@
                 text.innerText = "Tidak Sinkron";
             }
         }
-
         // --- SINKRONISASI WAKTU UTAMA LOOP ---
         function getAccurateTime() {
             return Date.now() + timeOffset;
         }
-
         // --- UPDATE JAM SECARA REALTIME ---
         function updateClock() {
-            const now = new Date(getAccurateTime());
-            
+            const now = new Date(getAccurateTime());      
             // Format Jam Utama
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
             const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
-
             document.getElementById('digital-time').innerText = `${hours}:${minutes}:${seconds}`;
             if (showMs) {
                 document.getElementById('digital-ms').innerText = `.${milliseconds}`;
             } else {
                 document.getElementById('digital-ms').innerText = '';
             }
-
             // Update Tanggal
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             document.getElementById('date-display').innerText = now.toLocaleDateString('id-ID', options);
-
             // Update Jam Analog
             // Untuk perputaran jarum detik yang halus (smooth sweep), gunakan milidetik
             const hDeg = (now.getHours() % 12) * 30 + now.getMinutes() * 0.5;
             const mDeg = now.getMinutes() * 6 + now.getSeconds() * 0.1;
             const sDeg = now.getSeconds() * 6 + now.getMilliseconds() * 0.006;
-
             document.getElementById('hour-hand').style.transform = `rotate(${hDeg}deg)`;
             document.getElementById('minute-hand').style.transform = `rotate(${mDeg}deg)`;
             document.getElementById('second-hand').style.transform = `rotate(${sDeg}deg)`;
-
             // Jika tab Jam Dunia aktif, perbarui jam dunia
             if (!document.getElementById('content-dunia').classList.contains('hidden')) {
                 updateWorldClocks(now);
             }
-
             requestAnimationFrame(updateClock);
         }
-
         function toggleMilliseconds() {
             showMs = !showMs;
             const btn = document.getElementById('btn-toggle-ms');
@@ -562,7 +504,6 @@
                 btn.className = "px-5 py-2.5 bg-brand-500/10 hover:bg-brand-500/20 active:scale-95 text-brand-400 font-medium rounded-xl text-sm transition-all duration-150 border border-brand-500/20";
             }
         }
-
         // --- SISTEM JAM DUNIA ---
         const worldCities = [
             { name: "Jakarta", timezone: "Asia/Jakarta", label: "WIB (GMT+7)" },
@@ -572,11 +513,9 @@
             { name: "Sydney", timezone: "Australia/Sydney", label: "AEST (GMT+10)" },
             { name: "Makkah", timezone: "Asia/Riyadh", label: "AST (GMT+3)" }
         ];
-
         function initWorldClocks() {
             const grid = document.getElementById('world-clock-grid');
-            grid.innerHTML = '';
-            
+            grid.innerHTML = '';          
             worldCities.forEach((city, index) => {
                 grid.innerHTML += `
                     <div class="glass p-5 rounded-2xl border border-gray-800 flex justify-between items-center hover:border-brand-500/30 transition-all duration-200">
@@ -592,13 +531,11 @@
                 `;
             });
         }
-
         function updateWorldClocks(accurateBaseTime) {
             worldCities.forEach((city, index) => {
                 const elementTime = document.getElementById(`world-time-${index}`);
                 const elementDate = document.getElementById(`world-date-${index}`);
                 if (!elementTime) return;
-
                 // Hitung waktu berdasarkan timezone masing-masing kota
                 const formatterTime = new Intl.DateTimeFormat('id-ID', {
                     timeZone: city.timezone,
@@ -607,29 +544,24 @@
                     second: '2-digit',
                     hour12: false
                 });
-
                 const formatterDate = new Intl.DateTimeFormat('id-ID', {
                     timeZone: city.timezone,
                     day: 'numeric',
                     month: 'short'
                 });
-
                 elementTime.innerText = formatterTime.format(accurateBaseTime);
                 elementDate.innerText = formatterDate.format(accurateBaseTime);
             });
         }
-
         // --- SISTEM STOPWATCH ---
         let stopwatchInterval;
         let stopwatchStartTime = 0;
         let stopwatchElapsedTime = 0;
         let stopwatchRunning = false;
         let stopwatchLaps = [];
-
         function startStopwatch() {
             const btn = document.getElementById('btn-stopwatch-start');
-            const btnLap = document.getElementById('btn-stopwatch-lap');
-            
+            const btnLap = document.getElementById('btn-stopwatch-lap');    
             if (!stopwatchRunning) {
                 // Mulai
                 stopwatchStartTime = Date.now() - stopwatchElapsedTime;
@@ -648,24 +580,20 @@
                 btnLap.disabled = true;
             }
         }
-
         function resetStopwatch() {
             clearInterval(stopwatchInterval);
             stopwatchStartTime = 0;
             stopwatchElapsedTime = 0;
             stopwatchRunning = false;
-            stopwatchLaps = [];
-            
+            stopwatchLaps = [];  
             document.getElementById('stopwatch-display').innerHTML = `00:00:00<span class="text-2xl sm:text-3xl text-brand-500">.00</span>`;
             document.getElementById('btn-stopwatch-start').innerText = "Mulai";
             document.getElementById('btn-stopwatch-start').className = "px-8 py-3 bg-brand-500 hover:bg-brand-600 text-white font-medium rounded-2xl text-sm transition-all duration-150 flex items-center gap-2 shadow-lg shadow-brand-500/20";
             document.getElementById('btn-stopwatch-lap').disabled = true;
             document.getElementById('stopwatch-laps').innerHTML = `<p class="text-sm text-gray-500 text-center py-4">Belum ada putaran yang direkam.</p>`;
         }
-
         function updateStopwatchDisplay() {
-            stopwatchElapsedTime = Date.now() - stopwatchStartTime;
-            
+            stopwatchElapsedTime = Date.now() - stopwatchStartTime;  
             let totalCentiseconds = Math.floor(stopwatchElapsedTime / 10);
             let centiseconds = totalCentiseconds % 100;
             let totalSeconds = Math.floor(totalCentiseconds / 100);
@@ -673,21 +601,16 @@
             let totalMinutes = Math.floor(totalSeconds / 60);
             let minutes = totalMinutes % 60;
             let hours = Math.floor(totalMinutes / 60);
-
-            const pad = (n) => String(n).padStart(2, '0');
-            
+            const pad = (n) => String(n).padStart(2, '0');      
             document.getElementById('stopwatch-display').innerHTML = `
                 ${pad(hours)}:${pad(minutes)}:${pad(seconds)}<span class="text-2xl sm:text-3xl text-brand-500">.${pad(centiseconds)}</span>
             `;
         }
-
         function lapStopwatch() {
-            if (!stopwatchRunning) return;
-            
+            if (!stopwatchRunning) return;           
             stopwatchLaps.unshift(stopwatchElapsedTime);
             const container = document.getElementById('stopwatch-laps');
             container.innerHTML = '';
-
             stopwatchLaps.forEach((lapTime, index) => {
                 let totalCentiseconds = Math.floor(lapTime / 10);
                 let centiseconds = totalCentiseconds % 100;
@@ -695,11 +618,9 @@
                 let seconds = totalSeconds % 60;
                 let totalMinutes = Math.floor(totalSeconds / 60);
                 let minutes = totalMinutes % 60;
-                let hours = Math.floor(totalMinutes / 60);
-                
+                let hours = Math.floor(totalMinutes / 60);                
                 const pad = (n) => String(n).padStart(2, '0');
                 const timeString = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}.${pad(centiseconds)}`;
-
                 container.innerHTML += `
                     <div class="flex justify-between items-center py-2 px-3 bg-gray-900/40 rounded-xl border border-gray-800">
                         <span class="text-xs text-gray-400 font-medium">Putaran ${stopwatchLaps.length - index}</span>
@@ -708,39 +629,31 @@
                 `;
             });
         }
-
-
         // --- SISTEM TIMER ---
         let timerInterval;
         let timerEndTime = 0;
         let timerTotalDuration = 0;
         let timerRemaining = 0;
         let timerRunning = false;
-
         function startTimer() {
             const btn = document.getElementById('btn-timer-start');
             const btnReset = document.getElementById('btn-timer-reset');
             const inputs = document.getElementById('timer-inputs');
             const displayCont = document.getElementById('timer-display-container');
-
             if (!timerRunning) {
                 // Mulai timer baru
                 const hours = parseInt(document.getElementById('timer-hour').value) || 0;
                 const minutes = parseInt(document.getElementById('timer-min').value) || 0;
                 const seconds = parseInt(document.getElementById('timer-sec').value) || 0;
-
-                const durationMs = ((hours * 3600) + (minutes * 60) + seconds) * 1000;
-                
+                const durationMs = ((hours * 3600) + (minutes * 60) + seconds) * 1000;              
                 if (durationMs <= 0) {
                     showToast("Kesalahan", "Harap tentukan durasi timer yang valid.", "gagal");
                     return;
                 }
-
                 timerTotalDuration = durationMs;
                 timerEndTime = Date.now() + durationMs;
                 timerInterval = setInterval(updateTimer, 100);
                 timerRunning = true;
-
                 // Ubah UI
                 inputs.classList.add('hidden');
                 displayCont.classList.remove('hidden');
@@ -761,76 +674,60 @@
                 btn.className = "px-8 py-3 bg-amber-500 hover:bg-amber-600 text-white font-medium rounded-2xl text-sm transition-all duration-150 flex items-center gap-2 shadow-lg shadow-amber-500/20";
             }
         }
-
         function updateTimer() {
             const now = Date.now();
             const difference = timerEndTime - now;
-
             if (difference <= 0) {
                 // Timer Selesai
                 clearInterval(timerInterval);
                 document.getElementById('timer-display').innerText = "00:00:00";
-                document.getElementById('timer-progress').style.width = '0%';
-                
+                document.getElementById('timer-progress').style.width = '0%';     
                 // Bunyi Beep Sederhana dengan Audio Synthesis API
                 playAlarmSound();
-
                 showToast("Timer Selesai!", "Durasi waktu hitung mundur Anda telah usai.");
                 resetTimer();
                 return;
             }
-
             // Tampilkan sisa waktu
             let totalSeconds = Math.floor(difference / 1000);
             let seconds = totalSeconds % 60;
             let totalMinutes = Math.floor(totalSeconds / 60);
             let minutes = totalMinutes % 60;
             let hours = Math.floor(totalSeconds / 60);
-
             const pad = (n) => String(n).padStart(2, '0');
             document.getElementById('timer-display').innerText = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-
             // Hitung Progress Bar
             const percent = (difference / timerTotalDuration) * 100;
             document.getElementById('timer-progress').style.width = `${percent}%`;
         }
-
         function resetTimer() {
             clearInterval(timerInterval);
-            timerRunning = false;
-            
+            timerRunning = false;        
             const btn = document.getElementById('btn-timer-start');
             const btnReset = document.getElementById('btn-timer-reset');
             const inputs = document.getElementById('timer-inputs');
             const displayCont = document.getElementById('timer-display-container');
-
             inputs.classList.remove('hidden');
             displayCont.classList.add('hidden');
-            btnReset.classList.add('hidden');
-            
+            btnReset.classList.add('hidden');         
             btn.innerText = "Mulai Timer";
             btn.className = "px-8 py-3 bg-brand-500 hover:bg-brand-600 text-white font-medium rounded-2xl text-sm transition-all duration-150 flex items-center gap-2 shadow-lg shadow-brand-500/20";
         }
-
         // Alarm Beep Synthesizer (Sederhana, aman tanpa file eksternal)
         function playAlarmSound() {
             try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();           
                 const playBeep = (freq, delay, duration) => {
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
                     osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    
+                    gain.connect(audioCtx.destination);              
                     osc.frequency.setValueAtTime(freq, audioCtx.currentTime + delay);
                     gain.gain.setValueAtTime(0.5, audioCtx.currentTime + delay);
-                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + delay + duration);
-                    
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + delay + duration);            
                     osc.start(audioCtx.currentTime + delay);
                     osc.stop(audioCtx.currentTime + delay + duration);
                 };
-
                 // Mainkan 3 kali bunyi beep
                 playBeep(880, 0, 0.2);
                 playBeep(880, 0.4, 0.2);
@@ -839,32 +736,24 @@
                 console.warn("Audio Context tidak didukung oleh browser Anda.");
             }
         }
-
-
         // --- MANAJEMEN TAB ---
         function switchTab(tabId) {
             // Sembunyikan semua tab content
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));        
             // Nonaktifkan semua style tombol tab
             document.querySelectorAll('[id^="tab-"]').forEach(el => {
                 el.className = "px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 text-gray-400 hover:text-white whitespace-nowrap";
             });
-
             // Tampilkan tab yang dipilih
-            document.getElementById(`content-${tabId}`).classList.remove('hidden');
-            
+            document.getElementById(`content-${tabId}`).classList.remove('hidden');         
             // Aktifkan style tombol tab terpilih
             document.getElementById(`tab-${tabId}`).className = "px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 bg-brand-500 text-white shadow-lg shadow-brand-500/20 whitespace-nowrap";
         }
-
-
         // --- NOTIFIKASI TOAST CUSTOM ---
         function showToast(title, desc, status = 'sukses') {
             const toast = document.getElementById('custom-toast');
             document.getElementById('toast-title').innerText = title;
             document.getElementById('toast-desc').innerText = desc;
-
             const iconContainer = document.getElementById('toast-icon-container');
             if (status === 'gagal') {
                 iconContainer.className = "p-1.5 bg-red-500/20 text-red-400 rounded-lg";
@@ -881,26 +770,22 @@
                     </svg>
                 `;
             }
-
             // Animasi Slide In
             toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
             toast.classList.add('translate-y-0', 'opacity-100');
-
             setTimeout(() => {
                 // Animasi Slide Out
                 toast.classList.remove('translate-y-0', 'opacity-100');
                 toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
             }, 4000);
         }
-
         // --- DEKORASI GRAPIS ANAK JAM (Ticks) ---
         function createClockTicks() {
             const ticksContainer = document.getElementById('clock-ticks');
             for (let i = 0; i < 60; i++) {
                 const tick = document.createElement('div');
                 tick.className = `absolute left-1/2 top-0 origin-bottom h-1/2 w-[1px] -translate-x-1/2`;
-                tick.style.transform = `rotate(${i * 6}deg)`;
-                
+                tick.style.transform = `rotate(${i * 6}deg)`;          
                 const marker = document.createElement('div');
                 if (i % 5 === 0) {
                     marker.className = 'w-[2px] h-3 bg-gray-400';
@@ -911,10 +796,7 @@
                 ticksContainer.appendChild(tick);
             }
         }
-
-
         // --- INTEGRASI GEMINI API ---
-
         // Fungsi pemanggilan inti Gemini API dengan Exponential Backoff
         async function callGemini(prompt, systemPrompt = "Kamu adalah asisten pengelola waktu dan jam pintar.") {
             const apiKey = ""; // Disediakan secara otomatis oleh runtime environment
@@ -923,24 +805,19 @@
                 contents: [{ parts: [{ text: prompt }] }],
                 systemInstruction: { parts: [{ text: systemPrompt }] }
             };
-
             let delay = 1000;
             const maxRetries = 5;
-
             for (let attempt = 1; attempt <= maxRetries; attempt++) {
                 try {
                     const response = await fetch(url, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
-                    });
-                    
-                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                    
+                    });              
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);                 
                     const data = await response.json();
                     const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-                    if (text) return text;
-                    
+                    if (text) return text;                  
                     throw new Error("Struktur respons tidak valid.");
                 } catch (error) {
                     if (attempt === maxRetries) {
@@ -952,69 +829,53 @@
                 }
             }
         }
-
         // Mempersiapkan Tampilan Output
         function prepareAIResponse() {
             const panel = document.getElementById('ai-output-panel');
             const loader = document.getElementById('ai-loader');
             const result = document.getElementById('ai-result');
-
             panel.classList.remove('hidden');
             loader.classList.remove('hidden');
             result.classList.add('hidden');
-            result.innerHTML = '';
-            
+            result.innerHTML = '';          
             // Scroll otomatis agar hasil terlihat pada perangkat mobile
             panel.scrollIntoView({ behavior: 'smooth' });
         }
-
         // Tampilkan Hasil Sukses
         function displayAIResult(text) {
             const loader = document.getElementById('ai-loader');
             const result = document.getElementById('ai-result');
-
             loader.classList.add('hidden');
-            result.classList.remove('hidden');
-            
+            result.classList.remove('hidden');          
             // Format sederhana dari Markdown dasar ke HTML (tebal, list)
             let formattedText = text
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                 .replace(/^\-\s(.*)$/gm, '• $1');
-
             result.innerHTML = formattedText;
         }
-
         // Tampilkan Error
         function displayAIError(errorMsg) {
             const loader = document.getElementById('ai-loader');
             const result = document.getElementById('ai-result');
-
             loader.classList.add('hidden');
             result.classList.remove('hidden');
             result.innerHTML = `<span class="text-red-400 font-semibold">⚠️ Terjadi Kesalahan:</span><br>${errorMsg}`;
             showToast("Gagal Memproses", "Asisten AI mengalami gangguan jaringan.", "gagal");
         }
-
         // 1. Aksi: Membuat Jadwal Harian
         async function generateSchedule() {
             const startTime = document.getElementById('ai-start-time').value;
             const tasks = document.getElementById('ai-tasks').value.trim();
-
             if (!tasks) {
                 showToast("Input Kosong", "Silakan masukkan setidaknya satu kegiatan harian terlebih dahulu.", "gagal");
                 return;
             }
-
             prepareAIResponse();
-
             const prompt = `Saya ingin merancang jadwal produktif berdasarkan daftar tugas berikut:
-            "${tasks}"
-            
+            "${tasks}"            
             Aktivitas saya dimulai tepat pukul: ${startTime}.
             Aturlah jadwal ini dengan pembagian jam yang realistis, berikan rekomendasi jeda istirahat (misalnya teknik Pomodoro), dan tips agar saya bisa disiplin waktu. Format output Anda dengan judul yang menarik, list jam yang rapi (format 24 jam), dan sekat antar bagian agar mudah dibaca.`;
-
             const systemPrompt = "Kamu adalah spesialis manajemen waktu dan pelatih produktivitas profesional. Bantu user menyusun agenda yang realistis, efisien, dan ramah energi mental.";
-
             try {
                 const response = await callGemini(prompt, systemPrompt);
                 displayAIResult(response);
@@ -1023,28 +884,21 @@
                 displayAIError(error.message);
             }
         }
-
         // 2. Aksi: Eksplorasi Wawasan Zona Waktu & Budaya
         async function exploreCulturalTime() {
             const location = document.getElementById('ai-timezone-city').value.trim();
-
             if (!location) {
                 showToast("Input Kosong", "Silakan ketik nama kota atau negara yang ingin Anda jelajahi.", "gagal");
                 return;
             }
-
             prepareAIResponse();
-
-            const prompt = `Berikan wawasan mendalam mengenai zona waktu dan budaya waktu di daerah/negara berikut: "${location}".
-            
+            const prompt = `Berikan wawasan mendalam mengenai zona waktu dan budaya waktu di daerah/negara berikut: "${location}".         
             Tolong ulas poin-poin berikut secara menarik dan edukatif:
             1. Informasi Zona Waktu Resmi & perbedaan jam dengan UTC/GMT.
             2. Sejarah atau fakta unik di balik pembagian zona waktu di sana.
             3. Perspektif Budaya terhadap Waktu (contoh: Apakah mereka menganut budaya ketepatan waktu yang ketat seperti Jepang, atau cenderung lebih santai seperti konsep 'Mañana' di Spanyol atau 'Jam Karet' di Indonesia?).
             4. Istilah unik atau kebiasaan produktivitas lokal yang berhubungan dengan waktu.`;
-
             const systemPrompt = "Kamu adalah antropolog budaya dan ahli geografi yang berspesialisasi dalam sosiologi waktu harian. Sajikan informasi yang akurat, menghibur, dan membuka wawasan sosiologis.";
-
             try {
                 const response = await callGemini(prompt, systemPrompt);
                 displayAIResult(response);
@@ -1053,7 +907,6 @@
                 displayAIError(error.message);
             }
         }
-
         // Menyalin Hasil AI ke Clipboard
         function copyAIResult() {
             const resultText = document.getElementById('ai-result').innerText;
@@ -1061,7 +914,6 @@
                 showToast("Gagal Menyalin", "Tidak ada hasil analisis yang valid untuk disalin.", "gagal");
                 return;
             }
-
             // Fallback salin teks yang aman untuk iFrame
             const textarea = document.createElement('textarea');
             textarea.value = resultText;
@@ -1075,15 +927,12 @@
             }
             document.body.removeChild(textarea);
         }
-
-
         // --- INISIALISASI SAAT HALAMAN SELESAI DI-LOAD ---
         window.onload = function() {
             createClockTicks();
             initWorldClocks();
             sinkronisasiWaktu();
-            updateClock();
-            
+            updateClock();          
             // Jadwalkan sinkronisasi otomatis berkala setiap 5 menit untuk menjaga akurasi dari drift/deviasi
             setInterval(sinkronisasiWaktu, 300000);
         };
